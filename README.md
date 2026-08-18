@@ -145,11 +145,21 @@ A security and compliance log of admin actions — agent registration, password 
 
 The Android app is used by field officers to complete forms on the move. The flow: log in → pick a form or job → fill in the dynamic form → capture a signature on a paired Wacom device → preview the generated PDF record → sync to the cloud.
 
+### Customer Registration
+
+![Android Customer Registration](screenshots/android-1.png)
+
+### Wacom Signature Capture
+
+![Android Wacom Signature Capture](screenshots/android-2.png)
+
+### PDF Record Preview
+
+![Android PDF Record Preview](screenshots/android-3.png)
+
 - A dynamic **Customer Registration** form rendering required text, number, and select fields, with unsaved-changes tracking and progress ("3/4 Answered").
 - A native **Wacom Ink SDK** signature capture screen, launched in-flow, capturing the signature directly against the form's purpose.
 - An on-device **PDF Record preview** generated immediately after signing, showing the submission ID, form version, timestamp, and every answer — including the rendered signature — before it syncs to the cloud.
-
-> Screenshots for this section are being re-added — the source files were overwritten during upload (see note below) — but the flow above reflects the current, working app.
 
 ---
 
