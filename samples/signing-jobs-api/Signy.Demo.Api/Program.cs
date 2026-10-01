@@ -11,7 +11,7 @@ app.MapGet("/api/signing-jobs", (HttpRequest httpRequest, ISigningJobStore store
 {
     if (!TryGetTenantId(httpRequest, out var tenantId, out var error))
     {
-        return error;
+        return error!;
     }
 
     return Results.Ok(store.ListForTenant(tenantId!));
@@ -21,7 +21,7 @@ app.MapGet("/api/signing-jobs/{id:guid}", (Guid id, HttpRequest httpRequest, ISi
 {
     if (!TryGetTenantId(httpRequest, out var tenantId, out var error))
     {
-        return error;
+        return error!;
     }
 
     var job = store.GetForTenant(id, tenantId!);
@@ -32,7 +32,7 @@ app.MapPost("/api/signing-jobs", (CreateSigningJobRequest request, HttpRequest h
 {
     if (!TryGetTenantId(httpRequest, out var tenantId, out var error))
     {
-        return error;
+        return error!;
     }
 
     try
@@ -52,7 +52,7 @@ app.MapPost("/api/signing-jobs/{id:guid}/complete", (Guid id, HttpRequest httpRe
 {
     if (!TryGetTenantId(httpRequest, out var tenantId, out var error))
     {
-        return error;
+        return error!;
     }
 
     var completed = store.MarkCompleted(id, tenantId!, DateTimeOffset.UtcNow);
@@ -74,4 +74,6 @@ static bool TryGetTenantId(HttpRequest request, out string? tenantId, out IResul
     return true;
 }
 
-public partial class Program;
+public partial class Program
+{
+}
