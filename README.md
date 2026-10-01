@@ -14,6 +14,7 @@ If you are reviewing this repository for a software-engineering role, these are 
 - **Automated tests:** [`InMemorySigningJobStoreTests.cs`](samples/signing-jobs-api/Signy.Demo.Api.Tests/InMemorySigningJobStoreTests.cs) — verifies duplicate-request handling and cross-tenant isolation.
 - **CI:** [`.github/workflows/portfolio-ci.yml`](.github/workflows/portfolio-ci.yml) — builds/tests the public sample and runs a lightweight secret-pattern guard on pull requests and `main`.
 - **Architecture decisions:** [`docs/architecture.md`](docs/architecture.md) — explains identity boundaries, tenant isolation, ERP idempotency, outbound branch connectivity and audit design.
+- **Real debugging case study:** [`docs/debugging-case-study.md`](docs/debugging-case-study.md) — a sanitized physical-pilot failure analysis covering cross-process file contention, root-cause reasoning and validation strategy.
 - **Publication/security boundary:** [`docs/publication-boundary.md`](docs/publication-boundary.md) — what is deliberately public versus kept private.
 - **Engineering workflow:** [`CONTRIBUTING.md`](CONTRIBUTING.md) — issue → branch → focused commits → PR → CI → merge.
 
