@@ -1,4 +1,5 @@
 using Signy.Demo.Api;
+using Xunit;
 
 namespace Signy.Demo.Api.Tests;
 
