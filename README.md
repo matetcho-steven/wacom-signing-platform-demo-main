@@ -4,7 +4,20 @@ A public portfolio case study for a multi-tenant, cloud-connected digital docume
 
 This project replaces manual, paper-based signing with an end-to-end digital workflow: dynamic forms are built once in the admin console, signed in the field or at a branch counter using a Wacom tablet, and the signed record (form data + signature + generated PDF) flows back to the cloud automatically, with a full audit trail behind it.
 
-> **Note:** This repository is a public case study. Private source code, API keys, tenant/database files, certificates, internal URLs, and production configuration are intentionally excluded. Everything below reflects the real, running system via screenshots and architecture description only.
+> **Note:** This repository is a public case study. Private source code, API keys, tenant/database files, certificates, internal URLs, and production configuration are intentionally excluded. The code under `samples/` is clean-room portfolio code written specifically for public review; it is not copied production source.
+
+## Reviewer quick path
+
+If you are reviewing this repository for a software-engineering role, these are the highest-signal areas:
+
+- **Public ASP.NET Core sample:** [`samples/signing-jobs-api`](samples/signing-jobs-api) — a small tenant-aware signing-job API showing dependency injection, idempotency, lifecycle state and reviewable backend structure.
+- **Automated tests:** [`InMemorySigningJobStoreTests.cs`](samples/signing-jobs-api/Signy.Demo.Api.Tests/InMemorySigningJobStoreTests.cs) — verifies duplicate-request handling and cross-tenant isolation.
+- **CI:** [`.github/workflows/portfolio-ci.yml`](.github/workflows/portfolio-ci.yml) — builds/tests the public sample and runs a lightweight secret-pattern guard on pull requests and `main`.
+- **Architecture decisions:** [`docs/architecture.md`](docs/architecture.md) — explains identity boundaries, tenant isolation, ERP idempotency, outbound branch connectivity and audit design.
+- **Publication/security boundary:** [`docs/publication-boundary.md`](docs/publication-boundary.md) — what is deliberately public versus kept private.
+- **Engineering workflow:** [`CONTRIBUTING.md`](CONTRIBUTING.md) — issue → branch → focused commits → PR → CI → merge.
+
+The screenshots below show the broader real system. The public code sample exists so reviewers can inspect concrete engineering decisions without exposing the private commercial codebase.
 
 ---
 
@@ -102,6 +115,8 @@ I designed and built the multi-tenant cloud API, the React/TypeScript admin cons
 - Branch machines never accept inbound connections — the Windows agent polls out over HTTPS, which keeps the security model simple for bank/hospital IT environments.
 - Every signature is captured through the Wacom SDK (Ink SDK on Android, native Wacom capture on Windows) and embedded into a generated PDF alongside the structured form answers.
 - All admin-side security-sensitive actions (agent registration, key rotation, password resets, user creation) are written to an audit trail for compliance review.
+
+For a more explicit component/decision view, see [`docs/architecture.md`](docs/architecture.md).
 
 ---
 
@@ -213,6 +228,6 @@ This platform improves that workflow by:
 
 This repository is not the full production system.
 
-It is a public portfolio summary created to show the platform's real workflow, screenshots, architecture direction, and technologies used across its cloud backend, admin console, Android app, and Windows branch agent.
+It is a public portfolio summary created to show the platform's real workflow, screenshots, architecture direction, technologies used across its cloud backend, admin console, Android app and Windows branch agent, plus selected clean-room samples that demonstrate engineering practices publicly.
 
-Private source code, client/tenant data, certificates, database files, API secrets, and production configuration files are intentionally excluded.
+Private source code, client/tenant data, certificates, database files, API secrets, production configuration files and third-party licensed material are intentionally excluded. See [`docs/publication-boundary.md`](docs/publication-boundary.md) for the publication policy used for this repository.
